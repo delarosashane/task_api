@@ -20,9 +20,13 @@ defmodule TaskApiWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", TaskApiWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", TaskApiWeb do
+    pipe_through :api
+
+    resources "/tasks", TaskController, except: [:new, :edit]
+    post "/users/register", UserController, :create
+    post "/users/login", UserController, :login
+  end
 
   # Enables LiveDashboard only for development
   #
