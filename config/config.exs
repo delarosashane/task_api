@@ -26,6 +26,11 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+# Guardian Configuration
+config :task_api, TaskApiWeb.Auth.Guardian,
+  issuer: "task_api",
+  secret_key: "5XFBuVD4L8+5ZUzA2lBF1DFoZL6zR0Bh/UabxapeBV6HhPBJwbPPg/pT95i+FJUw"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

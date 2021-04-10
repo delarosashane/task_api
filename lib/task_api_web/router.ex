@@ -13,6 +13,10 @@ defmodule TaskApiWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth_api do
+    plug TaskApiWeb.Auth.Pipeline
+  end
+
   scope "/", TaskApiWeb do
     pipe_through :browser
 
@@ -23,9 +27,14 @@ defmodule TaskApiWeb.Router do
   scope "/api", TaskApiWeb do
     pipe_through :api
 
+    scope "/users" do
+      post "/register", UserController, :create
+      post "/login", UserController, :login
+    end
+
+    pipe_through [:auth_api]
+
     resources "/tasks", TaskController, except: [:new, :edit]
-    post "/users/register", UserController, :create
-    post "/users/login", UserController, :login
   end
 
   # Enables LiveDashboard only for development

@@ -21,4 +21,12 @@ defmodule TaskApiWeb.FallbackController do
     |> put_view(TaskApiWeb.ErrorView)
     |> render(:"404")
   end
+
+  #Adds call for unauthorized user access
+  def call(conn, {:error, :unauthorized}) do
+    conn
+    |> put_status(:unauthorized)
+    |> put_view(TaskApi.ErrorView)
+    |> render(:"401")
+  end
 end

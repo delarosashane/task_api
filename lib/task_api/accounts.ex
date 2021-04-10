@@ -101,4 +101,24 @@ defmodule TaskApi.Accounts do
   def change_user(%User{} = user, attrs \\ %{}) do
     User.changeset(user, attrs)
   end
+
+  @doc """
+  Returns a user tuple by username. Returns a not found tuple if no user is found.
+
+  ## Example
+
+    iex> get_by_username(user_name)
+    {:ok, %User{}}
+
+    iex> get_by_username(error_username)
+    {:error, :not_found}
+  """
+  def get_by_username(username) do
+    case Repo.get_by(User, username: username) do
+      nil ->
+        {:error, :not_found}
+      user ->
+        {:ok, user}
+    end
+  end
 end
