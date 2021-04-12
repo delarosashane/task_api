@@ -34,7 +34,15 @@ defmodule TaskApiWeb.Router do
 
     pipe_through [:auth_api]
 
-    resources "/tasks", TaskController, except: [:new, :edit]
+    scope "/tasks" do
+      post "/create", TaskController, :create
+      put "/:id/update", TaskController, :update
+      delete "/:id", TaskController, :delete
+      get "/", TaskController, :index
+      get "/:id", TaskController, :show
+    end
+
+    # resources "/tasks", TaskController, except: [:new, :edit]
   end
 
   # Enables LiveDashboard only for development

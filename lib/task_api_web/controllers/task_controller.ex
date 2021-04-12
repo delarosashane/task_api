@@ -12,6 +12,7 @@ defmodule TaskApiWeb.TaskController do
   end
 
   def create(conn, %{"task" => task_params}) do
+    task_params = add_reporter(conn, task_params)
     with {:ok, %Task{} = task} <- Todo.create_task(task_params) do
       conn
       |> put_status(:created)
@@ -26,6 +27,8 @@ defmodule TaskApiWeb.TaskController do
   end
 
   def update(conn, %{"id" => id, "task" => task_params}) do
+    task_params = add_reporter(conn, task_params)
+
     task = Todo.get_task!(id)
 
     with {:ok, %Task{} = task} <- Todo.update_task(task, task_params) do
@@ -39,5 +42,15 @@ defmodule TaskApiWeb.TaskController do
     with {:ok, %Task{}} <- Todo.delete_task(task) do
       send_resp(conn, :no_content, "")
     end
+  end
+
+  defp add_reporter(conn, %{"reporter" => reporter} = params) when is_binary(reporter) do
+    if reporter == "", do: add_reporter(conn, Map.delete(params, "reporter")), else: params
+  end
+
+  defp add_reporter(conn, params) do
+    user = Guardian.Plug.current_resource(conn)
+
+    Map.put(params, "reporter", user.username)
   end
 end

@@ -12,6 +12,12 @@
 
 alias TaskApi.Repo
 alias TaskApi.Todo.Task
-Repo.insert! %Task{name: "Task 1", description: "Test Task 1", status: "todo"}
-Repo.insert! %Task{name: "Task 2", description: "Test Task 2", status: "todo"}
-Repo.insert! %Task{name: "Task 3", description: "Test Task 3", status: "todo"}
+alias TaskApi.Accounts.User
+alias TaskApi.Accounts
+
+# Inserts a user for login
+Accounts.create_user(%{email: "admin@email.com", password: "P@ssw0rd", username: "masteradmin"})
+
+Repo.insert! %Task{name: "Task 1", description: "Test Task 1", status: "todo", reporter: "masteradmin"}
+Repo.insert! %Task{name: "Task 2", description: "Test Task 2", status: "todo", reporter: "masteradmin"}
+Repo.insert! %Task{name: "Task 3", description: "Test Task 3", status: "todo", reporter: "masteradmin"}

@@ -3,11 +3,18 @@ defmodule TaskApi.TodoTest do
 
   alias TaskApi.Todo
 
+  setup do
+    # Adds user for validation
+    TaskApi.Repo.insert!(%TaskApi.Accounts.User{username: "some owner", email: "email2@email.com"})
+
+    {:ok, conn: Phoenix.ConnTest.build_conn()}
+  end
+
   describe "tasks" do
     alias TaskApi.Todo.Task
 
-    @valid_attrs %{description: "some description", name: "some name", owner: "some owner", status: "some status"}
-    @update_attrs %{description: "some updated description", name: "some updated name", owner: "some updated owner", status: "some updated status"}
+    @valid_attrs %{description: "some description", name: "some name", owner: "some owner", status: "todo", reporter: "some owner"}
+    @update_attrs %{description: "some updated description", name: "some updated name", owner: "some updated owner", status: "done", reporter: "some owner"}
     @invalid_attrs %{description: nil, name: nil, owner: nil, status: nil}
 
     def task_fixture(attrs \\ %{}) do
@@ -34,7 +41,7 @@ defmodule TaskApi.TodoTest do
       assert task.description == "some description"
       assert task.name == "some name"
       assert task.owner == "some owner"
-      assert task.status == "some status"
+      assert task.status == "todo"
     end
 
     test "create_task/1 with invalid data returns error changeset" do
@@ -47,7 +54,7 @@ defmodule TaskApi.TodoTest do
       assert task.description == "some updated description"
       assert task.name == "some updated name"
       assert task.owner == "some updated owner"
-      assert task.status == "some updated status"
+      assert task.status == "done"
     end
 
     test "update_task/2 with invalid data returns error changeset" do

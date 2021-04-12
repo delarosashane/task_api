@@ -15,6 +15,8 @@ defmodule TaskApiWeb.TaskView do
       name: task.name,
       description: task.description,
       status: task.status,
-      owner: task.owner}
+      owner: task.owner,
+      reporter: task.reporter
+    }
   end
 end
