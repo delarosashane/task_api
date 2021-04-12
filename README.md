@@ -26,6 +26,7 @@ User endpoints
 
 ##### Request
 `POST /users/register`
+    
     curl --location --request POST 'https://dual-ornery-tahr.gigalixirapp.com/api/users/register' \
     --header 'Content-Type: application/json' \
     --data-raw '{
@@ -46,6 +47,7 @@ User endpoints
 
 ##### Request
 `POST /users/login`
+    
     curl --location --request POST 'https://dual-ornery-tahr.gigalixirapp.com/api/users/login' \
     --header 'Content-Type: application/json' \
     --data-raw '{
@@ -69,6 +71,7 @@ Task endpoints
 
 ##### Request
 `POST /tasks/create`
+    
     curl --location --request POST 'https://dual-ornery-tahr.gigalixirapp.com/api/tasks/create' \
     --header 'Content-Type: application/json' \
     --header 'Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0YXNrX2FwaSIsImV4cCI6MTYyMDQ4MzY0NywiaWF0IjoxNjE4MDY0NDQ3LCJpc3MiOiJ0YXNrX2FwaSIsImp0aSI6ImI4YzZhOGFhLTM0MzAtNDA2Ny05MWQ3LTY0MGFiZjBiNWY0NyIsIm5iZiI6MTYxODA2NDQ0Niwic3ViIjoiMTAiLCJ0eXAiOiJhY2Nlc3MifQ.lklCvPSsJcFEu5PbFgB6RhEITImOTFR6dR70drXqbdOOb4777-QXzwgyBcQmCHdOuA6ICPfFmCkUCr2xe3ZGxw' \ 
@@ -95,6 +98,7 @@ Task endpoints
 
 ##### Request
 `PUT /tasks/:id/update`
+    
     curl --location --request PUT 'https://dual-ornery-tahr.gigalixirapp.com/api/tasks/:id/update' \
     --header 'Content-Type: application/json' \
     --header 'Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0YXNrX2FwaSIsImV4cCI6MTYyMDQ4MzY0NywiaWF0IjoxNjE4MDY0NDQ3LCJpc3MiOiJ0YXNrX2FwaSIsImp0aSI6ImI4YzZhOGFhLTM0MzAtNDA2Ny05MWQ3LTY0MGFiZjBiNWY0NyIsIm5iZiI6MTYxODA2NDQ0Niwic3ViIjoiMTAiLCJ0eXAiOiJhY2Nlc3MifQ.lklCvPSsJcFEu5PbFgB6RhEITImOTFR6dR70drXqbdOOb4777-QXzwgyBcQmCHdOuA6ICPfFmCkUCr2xe3ZGxw' \ 
@@ -121,6 +125,7 @@ Task endpoints
 
 ##### Request
 `DELETE /tasks/:id`
+    
     curl --location --request DELETE 'https://dual-ornery-tahr.gigalixirapp.com/api/tasks/:id' \
     --header 'Content-Type: application/json' \
     --header 'Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0YXNrX2FwaSIsImV4cCI6MTYyMDQ4MzY0NywiaWF0IjoxNjE4MDY0NDQ3LCJpc3MiOiJ0YXNrX2FwaSIsImp0aSI6ImI4YzZhOGFhLTM0MzAtNDA2Ny05MWQ3LTY0MGFiZjBiNWY0NyIsIm5iZiI6MTYxODA2NDQ0Niwic3ViIjoiMTAiLCJ0eXAiOiJhY2Nlc3MifQ.lklCvPSsJcFEu5PbFgB6RhEITImOTFR6dR70drXqbdOOb4777-QXzwgyBcQmCHdOuA6ICPfFmCkUCr2xe3ZGxw'
@@ -129,6 +134,7 @@ Task endpoints
 
 ##### Request
 `GET /tasks/:id`
+    
     curl --location --request PUT 'https://dual-ornery-tahr.gigalixirapp.com/api/tasks/:id' \
     --header 'Content-Type: application/json' \
     --header 'Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0YXNrX2FwaSIsImV4cCI6MTYyMDQ4MzY0NywiaWF0IjoxNjE4MDY0NDQ3LCJpc3MiOiJ0YXNrX2FwaSIsImp0aSI6ImI4YzZhOGFhLTM0MzAtNDA2Ny05MWQ3LTY0MGFiZjBiNWY0NyIsIm5iZiI6MTYxODA2NDQ0Niwic3ViIjoiMTAiLCJ0eXAiOiJhY2Nlc3MifQ.lklCvPSsJcFEu5PbFgB6RhEITImOTFR6dR70drXqbdOOb4777-QXzwgyBcQmCHdOuA6ICPfFmCkUCr2xe3ZGxw'
@@ -148,6 +154,7 @@ Task endpoints
 
 ##### Request
 `GET /tasks`
+    
     curl --location --request PUT 'https://dual-ornery-tahr.gigalixirapp.com/api/tasks' \
     --header 'Content-Type: application/json' \
     --header 'Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ0YXNrX2FwaSIsImV4cCI6MTYyMDQ4MzY0NywiaWF0IjoxNjE4MDY0NDQ3LCJpc3MiOiJ0YXNrX2FwaSIsImp0aSI6ImI4YzZhOGFhLTM0MzAtNDA2Ny05MWQ3LTY0MGFiZjBiNWY0NyIsIm5iZiI6MTYxODA2NDQ0Niwic3ViIjoiMTAiLCJ0eXAiOiJhY2Nlc3MifQ.lklCvPSsJcFEu5PbFgB6RhEITImOTFR6dR70drXqbdOOb4777-QXzwgyBcQmCHdOuA6ICPfFmCkUCr2xe3ZGxw'
