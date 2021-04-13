@@ -1,4 +1,7 @@
 defmodule TaskApiWeb.Auth.Guardian do
+  @moduledoc """
+  Guardian functions for the App
+  """
   use Guardian, otp_app: :task_api
 
   alias TaskApi.Accounts
