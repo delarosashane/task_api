@@ -22,6 +22,53 @@ defmodule TaskApi.Todo do
   end
 
   @doc """
+  Returns the list of tasks by order
+  """
+  def reorder_tasks(parameters) do
+    case Task.changeset_reorder(parameters) do
+      {:ok, params} ->
+        params = params |> sort_tasks()
+        {:ok, params}
+      {:error, changeset} ->
+        {:error, changeset}
+    end
+  end
+
+  @status_sorting """
+    (case(?)
+      when 'todo' then 1
+      when 'in_progress' then 2
+      when 'for_testing' then 3
+      else 4
+    end)
+  """
+  defp sort_tasks(%{"sort_by" => "status", "order" => sort}) do
+    if sort == "asc" do
+      Task
+      |> order_by([t], asc: fragment(@status_sorting, t.status))
+      |> Repo.all()
+    else
+      Task
+      |> order_by([t], desc: fragment(@status_sorting, t.status))
+      |> Repo.all()
+    end
+  end
+
+  defp sort_tasks(%{"sort_by" => key, "order" => sort}) do
+    key = String.to_atom(key)
+    case sort do
+      "asc" ->
+        Task
+        |> order_by(asc: ^key)
+        |> Repo.all()
+      _ ->
+        Task
+        |> order_by(desc: ^key)
+        |> Repo.all()
+    end
+  end
+
+  @doc """
   Gets a single task.
 
   Raises `Ecto.NoResultsError` if the Task does not exist.

@@ -47,8 +47,8 @@ defmodule TaskApiWeb.TaskControllerTest do
   end
 
   describe "index" do
-    test "lists all tasks", %{conn: conn} do
-      conn = get(conn, Routes.task_path(conn, :index))
+    test "lists all tasks", %{conn: auth_conn} do
+      conn = get(auth_conn, Routes.task_path(auth_conn, :index))
       assert json_response(conn, 200)["data"] == []
     end
   end
@@ -110,6 +110,14 @@ defmodule TaskApiWeb.TaskControllerTest do
       assert_error_sent 404, fn ->
         get(auth_conn, Routes.task_path(auth_conn, :show, task))
       end
+    end
+  end
+
+  describe "reorder task" do
+    test "reorders tasks", %{conn: auth_conn} do
+      params = %{sort_by: "status", order: "asc"}
+      conn = post(auth_conn, Routes.task_path(auth_conn, :reorder, params))
+      assert json_response(conn, 200)["data"] == []
     end
   end
 

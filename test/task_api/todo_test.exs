@@ -73,5 +73,30 @@ defmodule TaskApi.TodoTest do
       task = task_fixture()
       assert %Ecto.Changeset{} = Todo.change_task(task)
     end
+
+    test "reorder_task/1 with valid params returns ordered list of tasks - status, asc" do
+      task_fixture()
+      Todo.create_task(%{description: "some description", name: "some name 2", owner: "some owner", status: "in_progress", reporter: "some owner"})
+
+      {:ok, tasks} = Todo.reorder_tasks(%{"sort_by" => "status", "order" => "asc"})
+      assert "todo" == List.first(tasks).status
+    end
+
+    test "reorder_task/1 with valid params returns ordered list of tasks - status, desc" do
+      task_fixture()
+      Todo.create_task(%{description: "some description", name: "some name 2", owner: "some owner", status: "in_progress", reporter: "some owner"})
+
+      {:ok, tasks} = Todo.reorder_tasks(%{"sort_by" => "status", "order" => "desc"})
+      assert "in_progress" == List.first(tasks).status
+    end
+
+    test "reorder_task/1 with invalid params returns ordered list of tasks returns error changeset" do
+      task_fixture()
+      Todo.create_task(%{description: "some description", name: "some name 2", owner: "some owner", status: "in_progress", reporter: "some owner"})
+
+      assert {:error, %Ecto.Changeset{}} = Todo.reorder_tasks(%{"sort_by" => "asdas", "order" => "asc"})
+    end
+
+
   end
 end

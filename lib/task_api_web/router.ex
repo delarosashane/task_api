@@ -40,6 +40,7 @@ defmodule TaskApiWeb.Router do
       delete "/:id", TaskController, :delete
       get "/", TaskController, :index
       get "/:id", TaskController, :show
+      post "/reorder", TaskController, :reorder
     end
 
     # resources "/tasks", TaskController, except: [:new, :edit]

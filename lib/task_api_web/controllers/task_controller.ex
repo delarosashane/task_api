@@ -44,6 +44,17 @@ defmodule TaskApiWeb.TaskController do
     end
   end
 
+  @spec reorder(
+          Plug.Conn.t(),
+          :invalid | %{optional(:__struct__) => none, optional(atom | binary) => any}
+        ) :: Plug.Conn.t()
+  def reorder(conn, task_params) do
+    with {:ok, tasks} <- Todo.reorder_tasks(task_params) do
+      render(conn, "index.json", tasks: tasks)
+    end
+  end
+
+  # Adds current user if there is no reporter in parameters
   defp add_reporter(conn, %{"reporter" => reporter} = params) when is_binary(reporter) do
     if reporter == "", do: add_reporter(conn, Map.delete(params, "reporter")), else: params
   end

@@ -26,6 +26,40 @@ defmodule TaskApi.Todo.Task do
     |> validate_status()
   end
 
+  @doc false
+  def changeset_reorder(attrs) do
+    data  = %{}
+    types = %{sort_by: :string, order: :string}
+    changeset =
+      {data, types}
+      |> cast(attrs, Map.keys(types))
+      |> validate_required([:sort_by, :order])
+      |> validate_key(:sort_by)
+      |> validate_inclusion(:order, ["asc", "desc", "ASC", "DESC"])
+
+    if changeset.valid? do
+      {:ok, attrs}
+    else
+      {:error, changeset}
+    end
+  end
+
+  defp validate_key(%{changes: %{sort_by: sort_by}} = changeset, :sort_by) do
+    if changeset.valid? do
+      sort = ["name", "description", "status", "owner", "reporter", "inserted_at", "updated_at", "id"]
+
+      case Enum.member?(sort, String.downcase(sort_by)) do
+        true ->
+          changeset
+        _ ->
+          add_error(changeset,
+          :sort_by,
+          "Sort by is invalid. Available sorting: [name, description, status, owner, reporter, inserted_at, updated_at, id]"
+        )
+      end
+    end
+  end
+
   defp validate_key(changeset, key) do
     if changeset.valid? do
       val = changeset |> get_field(key)
