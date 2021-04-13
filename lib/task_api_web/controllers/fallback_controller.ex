@@ -26,7 +26,7 @@ defmodule TaskApiWeb.FallbackController do
   def call(conn, {:error, :unauthorized}) do
     conn
     |> put_status(:unauthorized)
-    |> put_view(TaskApi.ErrorView)
+    |> put_view(TaskApiWeb.ErrorView)
     |> render(:"401")
   end
 end
